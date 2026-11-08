@@ -57,15 +57,9 @@ export const ProfileSwitcherDialog: React.FC<Props> = ({ isOpen, onClose }) => {
     if (!newProfileName.trim()) return
     if (!window.profileApi) return
     try {
-      const created = await window.profileApi.createProfile(
-        newProfileName.trim()
-      )
+      await window.profileApi.createProfile(newProfileName.trim())
       setNewProfileName('')
-      if (created?.id) {
-        await handleSwitch(created.id)
-      } else {
-        await loadData()
-      }
+      await loadData()
     } catch (err) {
       console.error('[ProfileSwitcher] Failed to create profile:', err)
     }
