@@ -25,8 +25,8 @@ export default defineConfig(({ mode }) => ({
         }
       },
       outDir: 'build/main',
-      minify: false,
-      sourcemap: 'inline'
+      minify: mode === 'production',
+      sourcemap: mode === 'development' ? 'inline' : false
     },
     resolve: { alias: srcAliases },
     plugins: [externalizeDepsPlugin({ exclude: dependenciesToNotExternalize })]
