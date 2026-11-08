@@ -1081,6 +1081,20 @@
         "win": "windows"
     },
     "please-wait": "Please wait...",
+    "profiles": {
+        "active": "Active",
+        "cancel": "Cancel",
+        "confirmDelete": "Are you sure you want to delete profile \"{{name}}\"?",
+        "create": "Create",
+        "delete": "Delete profile",
+        "lastUsed": "Last used",
+        "newPlaceholder": "New profile name...",
+        "rename": "Rename profile",
+        "save": "Save",
+        "sidebar": "Profiles",
+        "switching": "Switching profile and restarting Heroic...",
+        "title": "User Profiles"
+    },
     "progress": "Progress",
     "queue": {
         "label": {

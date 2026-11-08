@@ -1,3 +1,4 @@
+import { ProfileSidebarItem } from 'frontend/components/ProfileSwitcher/ProfileSidebarItem'
 import {
   BookOpen,
   Gamepad2,
@@ -163,6 +164,11 @@ export default function SidebarLinks() {
       />
 
       <QuitButton dataTour="sidebar-quit" />
+
+      <div className="Sidebar__sectionLabel">
+        {t('profiles.sidebar', 'Profiles')}
+      </div>
+      <ProfileSidebarItem />
 
       <div className="Sidebar__sectionLabel">{t('Community', 'Community')}</div>
 

@@ -1,3 +1,5 @@
+import './profileManager/bootstrap'
+import { registerProfileIpc } from './profileManager/ipc'
 import {
   initImagesCache,
   clearImagesCache,
@@ -350,6 +352,7 @@ if (!gotTheLock) {
     contents.on('will-redirect', interceptItchioOAuth)
   })
   app.whenReady().then(async () => {
+    registerProfileIpc()
     initLogger()
 
     await MigrationSystem.get().applyMigrations()

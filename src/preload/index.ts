@@ -26,3 +26,4 @@ if (navigator.userAgent.includes('Windows')) {
     set: function (a) {}
   })
 }
+import './profiles'
