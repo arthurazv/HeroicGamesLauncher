@@ -45,26 +45,12 @@ export async function checkForRedistUpdates() {
       })
       // Filter redist with those only
       const installed = manifest.HGLInstalled || []
-      // Something is no longer required or new redist is needed
-      if (requiredRedist.length !== installed.length) {
-        logInfo('Updating redist, reason - different number of redist', {
+      // Only set shouldUpdate = true if requiredRedist.some((redist) => !installed.includes(redist))
+      if (requiredRedist.some((redist) => !installed.includes(redist))) {
+        logInfo('Updating redist, reason - missing required redist', {
           prefix: LogPrefix.Gog
         })
         shouldUpdate = true
-      } else {
-        // Check if we need new redist
-        const sortedReq = requiredRedist.sort()
-        const sortedInst = installed.sort()
-
-        for (const index in sortedReq) {
-          if (sortedReq[index] !== sortedInst[index]) {
-            logInfo('Updating redist, reason - different redist required', {
-              prefix: LogPrefix.Gog
-            })
-            shouldUpdate = true
-            break
-          }
-        }
       }
 
       // Check if manifest itself changed
@@ -183,6 +169,20 @@ export async function getRequiredRedistList(): Promise<string[]> {
 export async function updateRedist(redistToSync: string[]): Promise<{
   status: 'done' | 'error'
 }> {
+  const manifestPath = path.join(gogRedistPath, '.gogdl-redist-manifest')
+  if (existsSync(manifestPath)) {
+    try {
+      const fileData = await readFile(manifestPath, { encoding: 'utf8' })
+      const manifest: GOGRedistManifest = JSON.parse(fileData)
+      const installed = manifest.HGLInstalled || []
+      redistToSync = Array.from(new Set([...installed, ...redistToSync]))
+    } catch (e) {
+      logError(['Failed to read gog redist manifest', e], {
+        prefix: LogPrefix.Gog
+      })
+    }
+  }
+
   const { maxWorkers } = GlobalConfig.get().getSettings()
   const workers = maxWorkers ? ['--max-workers', `${maxWorkers}`] : []
   const logPath = path.join(gamesConfigPath, 'gog-redist.log')
