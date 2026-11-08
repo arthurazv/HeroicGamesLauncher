@@ -1,3 +1,4 @@
+import { ProfileSidebarItem } from 'frontend/components/ProfileSwitcher/ProfileSidebarItem'
 import {
   BookOpen,
   Gamepad2,
@@ -229,29 +230,24 @@ export default function SidebarLinks() {
         dataTour="sidebar-settings"
       />
 
-      {!loggedIn && (
+      <QuitButton dataTour="sidebar-quit" />
+
+      <div className="Sidebar__sectionLabel">{t('Accounts', 'Accounts')}</div>
+      <ProfileSidebarItem />
+      {loggedIn ? (
+        <SidebarItem
+          url="/login"
+          icon={<Icon glyph={UserCircle} />}
+          label={t('userselector.manage', 'Manage')}
+          dataTour="sidebar-manage-accounts"
+        />
+      ) : (
         <SidebarItem
           icon={<Icon glyph={LogIn} />}
           label={t('sidebar.storesLogin', 'Stores Login')}
           url="/login"
           dataTour="sidebar-login"
         />
-      )}
-
-      <QuitButton dataTour="sidebar-quit" />
-
-      {loggedIn && (
-        <>
-          <div className="Sidebar__sectionLabel">
-            {t('Accounts', 'Accounts')}
-          </div>
-          <SidebarItem
-            url="/login"
-            icon={<Icon glyph={UserCircle} />}
-            label={t('userselector.manage', 'Manage')}
-            dataTour="sidebar-manage-accounts"
-          />
-        </>
       )}
 
       <div className="Sidebar__sectionLabel">{t('Community', 'Community')}</div>

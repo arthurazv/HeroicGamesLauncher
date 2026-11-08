@@ -1,0 +1,218 @@
+.profileSwitcherModal {
+  min-width: 420px;
+  max-width: 480px;
+
+  .profileList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 280px;
+    overflow-y: auto;
+    margin-bottom: 16px;
+    padding-right: 4px;
+  }
+
+  .profileItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    border: 1px solid var(--accent);
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: color-mix(in srgb, var(--accent) 15%, transparent);
+      border-color: var(--accent);
+    }
+
+    &--active {
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      border-color: var(--accent);
+    }
+
+    &__info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    &__avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--accent) 25%, #272f31);
+      color: var(--accent);
+      border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      text-transform: uppercase;
+    }
+
+    &__details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-default);
+    }
+
+    &__date {
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    &__badge {
+      background: var(--accent);
+      color: #070a0b;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    &__actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    &__actionBtn {
+      background: none;
+      border: none;
+      color: var(--text-default);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.6;
+      transition: all 0.2s;
+
+      &:hover {
+        opacity: 1;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--accent);
+      }
+
+      &--delete:hover {
+        color: var(--status-danger);
+        background: color-mix(in srgb, var(--status-danger) 20%, transparent);
+      }
+    }
+
+    &__editInline {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    &__editInput {
+      width: 140px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      padding: 2px 6px;
+      color: var(--text-default);
+      font-size: 13px;
+      outline: none;
+    }
+
+    &__editSaveBtn,
+    &__editCancelBtn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 2px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    &__editSaveBtn {
+      color: var(--accent);
+      &:hover {
+        background: color-mix(in srgb, var(--accent) 20%, transparent);
+      }
+    }
+
+    &__editCancelBtn {
+      color: var(--text-default);
+      opacity: 0.7;
+      &:hover {
+        opacity: 1;
+        background: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+
+  .profileCreateForm {
+    display: flex;
+    gap: 8px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .profileCreateInput {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: var(--text-default);
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+
+    &:focus {
+      border-color: var(--accent);
+    }
+  }
+
+  .profileSwitchingOverlay {
+    padding: 32px 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid color-mix(in srgb, var(--accent) 20%, transparent);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

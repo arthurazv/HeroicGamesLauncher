@@ -1,3 +1,5 @@
+import './profileManager/bootstrap'
+import { registerProfileIpc } from './profileManager/ipc'
 import { initImagesCache } from './images_cache'
 import { fetchLastestReleases } from './utils/releases'
 import { DiskSpaceData, StatusPromise, WineInstallation } from 'common/types'
@@ -337,6 +339,7 @@ if (!gotTheLock) {
     contents.on('will-redirect', interceptItchioOAuth)
   })
   app.whenReady().then(async () => {
+    registerProfileIpc()
     initLogger()
 
     await MigrationSystem.get().applyMigrations()
